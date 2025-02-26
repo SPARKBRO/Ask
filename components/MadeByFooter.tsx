@@ -1,4 +1,4 @@
-import { Instagram } from "lucide-react";
+import { Github, Instagram } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -11,6 +11,14 @@ export default function Footer() {
         className="hover:text-pink-500 transition"
       >
         <Instagram size={20} />
+      </a>
+      <a
+        href="https://github.com/jerinjacob1999/ask-a-date"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-gray-500 transition"
+      >
+        <Github size={20} />
       </a>
     </footer>
   );
