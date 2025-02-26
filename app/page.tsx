@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { theme, setTheme, showBalloons, setIsMuted } = useGlobalContext()
+  const { theme, setTheme, showBalloons, setIsMuted, isMuted } = useGlobalContext()
   const [showFinalScreen, setShowFinalScreen] = useState(false)
   const [name, setName] = useState("")
 
@@ -34,7 +34,7 @@ export default function Home() {
     }
 
   //  resetBalloons()
-  }, [setTheme])
+  }, [setTheme, isMuted])
 
   return (
     <DateQuestionProvider>

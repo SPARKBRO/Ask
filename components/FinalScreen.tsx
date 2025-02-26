@@ -20,7 +20,7 @@ export default function FinalScreen({ name }: FinalScreenProps) {
       className={`text-center min-h-screen flex flex-col items-center justify-center ${getThemeBackground(theme)}`}
     >
       <h2 className={`text-4xl md:text-6xl font-bold mb-8 ${getThemeTextColor(theme)}`}>
-        {name ? `Yay, ${name}! ` : "Yay! "}Can't wait for our date! {theme === "cute" ? "💕" : ""}
+        {name ? `Yay, ${name}! ` : "Yay! "}Can&apos;t wait for our date! {theme === "cute" ? "💕" : ""}
       </h2>
       <div className="space-y-4">
         <ShareInvitation name={name} />

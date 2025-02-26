@@ -18,8 +18,8 @@ const playfair = Playfair_Display({ subsets: ["latin"] })
 const pixelify = Pixelify_Sans({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Hola hermosa",
-  description: "Let me ask you something",
+  title: "Guess What's Inside? 🎁",
+  description: "I've prepared a special surprise just for you! Click to uncover the fun waiting behind this door.",
 };
 
 export default function RootLayout({
