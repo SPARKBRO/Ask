@@ -13,7 +13,7 @@ export default function Footer() {
         <Instagram size={20} />
       </a>
       <a
-        href="https://github.com/jerinjacob1999/ask-a-date"
+        href="https://github.com/jerinjacob007/ask-a-date"
         target="_blank"
         rel="noopener noreferrer"
         className="hover:text-gray-500 transition"
