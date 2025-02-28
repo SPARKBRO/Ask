@@ -1,8 +1,8 @@
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { GlobalProvider } from "@/contexts/GlobalContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pixelify_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { GlobalProvider } from "@/contexts/GlobalContext";
-import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +38,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <GlobalProvider>{children}</GlobalProvider>
+          <GlobalProvider>
+              {children}
+          </GlobalProvider>
         </ThemeProvider>
       </body>
     </html>
