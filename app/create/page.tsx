@@ -5,7 +5,6 @@ import { MuteButton } from "@/components/MuteButton"
 import { CreateInvitationProvider, useCreateInvitationContext } from "@/contexts/CreateInvitationContext"
 import { useGlobalContext } from "@/contexts/GlobalContext"
 import { getThemeBackground, getThemeBorderColor, getThemeButtonStyle, getThemeInputStyle, getThemeTextColor } from "@/utils/theme-utils"
-import Head from "next/head"
 import { useRouter } from "next/navigation"
 import type React from "react"
 
@@ -46,8 +45,8 @@ const CreateInvitationForm = () => {
           placeholder="e.g., Alex"
           required
         />
-
       </div>
+      
       <div className="mb-6">
         <label className={`block text-lg font-medium mb-2 ${getThemeTextColor(selectedTheme)}`}>Choose a theme:</label>
         <div className="grid grid-cols-2 gap-4">
@@ -81,13 +80,7 @@ export default function CreateDateInvitation() {
 
   return (
     <CreateInvitationProvider>
-      <Head >
-        <title>Ask her out</title>
-        <meta name="description" content="reate themified page to ask her out" />
-
-      </Head>
       <div className={`min-h-screen flex flex-col flex-grow`}>
-
         <div className={`flex flex-grow flex-col items-center justify-center p-4 ${getThemeBackground(theme)}`}>
           <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-8 ${getThemeTextColor(theme)} text-center`}>
             Create Your Date Invitation
@@ -97,8 +90,6 @@ export default function CreateDateInvitation() {
         </div>
         <Footer />
       </div>
-
-
     </CreateInvitationProvider>
   )
 }
