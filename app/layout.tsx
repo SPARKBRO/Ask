@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { GlobalProvider } from "@/contexts/GlobalContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pixelify_Sans, Playfair_Display } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,7 +40,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <GlobalProvider>
+            <Suspense fallback={<p className="text-center text-lg font-semibold animate-pulse">🎁 Unlocking Your Gift...</p>}>
               {children}
+            </Suspense>
           </GlobalProvider>
         </ThemeProvider>
       </body>
