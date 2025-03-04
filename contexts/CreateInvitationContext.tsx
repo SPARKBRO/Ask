@@ -7,6 +7,8 @@ import type { Theme } from "./GlobalContext"
 interface CreateInvitationContextType {
   name: string
   setName: React.Dispatch<React.SetStateAction<string>>
+  senderName: string
+  setSenderName: React.Dispatch<React.SetStateAction<string>>
   selectedTheme: Theme
   setSelectedTheme: React.Dispatch<React.SetStateAction<Theme>>
 }
@@ -15,6 +17,7 @@ const CreateInvitationContext = createContext<CreateInvitationContextType | unde
 
 export const CreateInvitationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [name, setName] = useState("")
+  const [senderName, setSenderName] = useState("")
   const [selectedTheme, setSelectedTheme] = useState<Theme>("cute")
 
   return (
@@ -22,6 +25,8 @@ export const CreateInvitationProvider: React.FC<{ children: React.ReactNode }> =
       value={{
         name,
         setName,
+        senderName,
+        setSenderName,
         selectedTheme,
         setSelectedTheme,
       }}
