@@ -7,6 +7,7 @@ import { useGlobalContext } from "@/contexts/GlobalContext"
 import { getThemeBackground, getThemeBorderColor, getThemeButtonStyle, getThemeInputStyle, getThemeTextColor } from "@/utils/theme-utils"
 import { useRouter } from "next/navigation"
 import type React from "react"
+import { useState } from "react"
 
 const themes = {
   cute: "Cute Love",
@@ -18,23 +19,40 @@ const themes = {
 
 
 const CreateInvitationForm = () => {
-  const { name, setName, selectedTheme, setSelectedTheme } = useCreateInvitationContext()
+  const { name, setName, senderName, setSenderName, selectedTheme, setSelectedTheme } = useCreateInvitationContext()
   const { isMuted } = useGlobalContext()
-
+  const [email, setEmail] = useState("")
   const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (name.trim()) {
-      router.push(`/?name=${encodeURIComponent(name.trim())}&theme=${selectedTheme}&muted=${isMuted}`)
+    if (name.trim() && email.trim() && senderName.trim()) {
+      router.push(
+        `/?name=${encodeURIComponent(name.trim())}&theme=${selectedTheme}&muted=${isMuted}&email=${encodeURIComponent(email.trim())}&sender=${encodeURIComponent(senderName.trim())}`
+      )
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md flex-grow">
       <div className="mb-6">
+        <label htmlFor="senderName" className={`block text-lg font-medium mb-2 ${getThemeTextColor(selectedTheme)}`}>
+          Your name:
+        </label>
+        <input
+          type="text"
+          id="senderName"
+          value={senderName}
+          onChange={(e) => setSenderName(e.target.value)}
+          className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${getThemeInputStyle(selectedTheme)}`}
+          placeholder="Your name"
+          required
+        />
+      </div>
+
+      <div className="mb-6">
         <label htmlFor="name" className={`block text-lg font-medium mb-2 ${getThemeTextColor(selectedTheme)}`}>
-          Enter the name of your date:
+          Your date's name:
         </label>
         <input
           type="text"
@@ -42,7 +60,22 @@ const CreateInvitationForm = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${getThemeInputStyle(selectedTheme)}`}
-          placeholder="e.g., Alex"
+          placeholder="Their name"
+          required
+        />
+      </div>
+      
+      <div className="mb-6">
+        <label htmlFor="email" className={`block text-lg font-medium mb-2 ${getThemeTextColor(selectedTheme)}`}>
+          Your email address (to receive their response):
+        </label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${getThemeInputStyle(selectedTheme)}`}
+          placeholder="your@email.com"
           required
         />
       </div>

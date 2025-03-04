@@ -22,21 +22,70 @@ export default function DateQuestion({ onYesClick, name }: DateQuestionProps) {
   const { playYesSound, startNoSound, stopNoSound, stopAllSounds } = useAudio(isMuted)
   const [isStartConfetti, setStartConfetti] = useState(false);
 
-  const handleYesClick = () => {
+  const handleYesClick = async () => {
     setIsConfirmed(true)
     setStartConfetti(true)
     playYesSound()
-    //setShowCat(true)
     setShowBalloons(true)
     stopNoSound()
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const senderEmail = searchParams.get('email');
+    const senderName = searchParams.get('sender');
+
+    if (senderEmail && senderName) {
+      try {
+        await fetch('/api/date-response', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            senderEmail,
+            senderName,
+            recipientName: name,
+            response: 'accepted',
+          }),
+        });
+      } catch (error) {
+        console.error('Error sending response:', error);
+      }
+    }
+
     setTimeout(() => {
       onYesClick()
     }, 3000)
   }
 
-  const handleNoClick = () => {
+  const handleNoClick = async () => {
     setYesButtonScale((prevScale) => prevScale * 1.2)
     startNoSound()
+
+    // Commenting out email notification for "No" responses for now
+    /*
+    const searchParams = new URLSearchParams(window.location.search);
+    const senderEmail = searchParams.get('email');
+    const senderName = searchParams.get('sender');
+
+    if (senderEmail && senderName) {
+      try {
+        await fetch('/api/date-response', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            senderEmail,
+            senderName,
+            recipientName: name,
+            response: 'rejected',
+          }),
+        });
+      } catch (error) {
+        console.error('Error sending response:', error);
+      }
+    }
+    */
   }
 
   const toggleMute = () => {
@@ -51,6 +100,7 @@ export default function DateQuestion({ onYesClick, name }: DateQuestionProps) {
   return (
     <div
       className={`fixed inset-0 flex flex-col items-center justify-center p-4 sm:p-8 text-center overflow-hidden ${getThemeBackground(theme)}`}
+      suppressHydrationWarning
     >
       <div >
         {  isStartConfetti && <ReactConfetti />}

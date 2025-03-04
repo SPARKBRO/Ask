@@ -2,7 +2,6 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { GlobalProvider } from "@/contexts/GlobalContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pixelify_Sans, Playfair_Display } from "next/font/google";
-import { Suspense } from "react";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,20 +28,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.className} ${pixelify.className} `}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.className} ${pixelify.className}`}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          suppressHydrationWarning
         >
           <GlobalProvider>
-            <Suspense fallback={<p className="text-center text-lg font-semibold animate-pulse">🎁 Unlocking Your Gift...</p>}>
-              {children}
-            </Suspense>
+            {children}
           </GlobalProvider>
         </ThemeProvider>
       </body>
